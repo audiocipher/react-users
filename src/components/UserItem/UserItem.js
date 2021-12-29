@@ -2,7 +2,7 @@ import styles from './UserItem.module.css';
 
 const UserItem = (props) => {
   return (
-    <li>
+    <li className={styles.container}>
       <p>{`${props.username} (${props.age} years old)`}</p>
     </li>
   );

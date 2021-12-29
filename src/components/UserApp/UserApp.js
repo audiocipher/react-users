@@ -24,9 +24,13 @@ const UserApp = () => {
   };
 
   return (
-    <div>
-      <UserForm onAddUser={handleAddUser} />
-      <UserList users={users} />
+    <div className={styles.container}>
+      <Card>
+        <UserForm onAddUser={handleAddUser} />
+      </Card>
+      <Card>
+        <UserList users={users} />
+      </Card>
     </div>
   );
 };

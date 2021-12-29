@@ -31,7 +31,7 @@ const UserForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.container} onSubmit={handleSubmit}>
       <UserInput
         label="Username"
         value={username}

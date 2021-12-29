@@ -3,7 +3,7 @@ import { useState } from 'react';
 import UserForm from '../UserForm/UserForm';
 import UserList from '../UserList/UserList';
 
-import Card from '../../UI/Card/Card';
+import Card from '../UI/Card/Card';
 
 import styles from './UserApp.module.css';
 

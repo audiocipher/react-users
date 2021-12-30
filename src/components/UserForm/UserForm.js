@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import UserInput from '../UserInput/UserInput';
 import Button from '../UI/Button/Button';
@@ -69,7 +69,7 @@ const UserForm = (props) => {
   };
 
   return (
-    <div>
+    <Fragment>
       {error && (
         <ErrorModal
           title={error.title}
@@ -90,7 +90,7 @@ const UserForm = (props) => {
         />
         <Button type="submit">Add User</Button>
       </form>
-    </div>
+    </Fragment>
   );
 };
 

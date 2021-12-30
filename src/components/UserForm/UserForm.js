@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useRef } from 'react';
 
 import UserInput from '../UserInput/UserInput';
 import Button from '../UI/Button/Button';
@@ -7,31 +7,29 @@ import ErrorModal from '../UI/ErrorModal/ErrorModal';
 import styles from './UserForm.module.css';
 
 const UserForm = (props) => {
-  const [username, setUsername] = useState('');
-  const [age, setAge] = useState('');
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
   const [error, setError] = useState();
-
-  const handleChangeUsername = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handleChangeAge = (event) => {
-    setAge(event.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!isValidInput()) {
+    const username = nameInputRef.current.value;
+    const age = ageInputRef.current.value;
+
+    if (!isValidInput(username, age)) {
       return;
     }
 
     props.onAddUser({ username, age });
 
-    resetFields();
+    // reset the input fields
+    nameInputRef.current.value = '';
+    ageInputRef.current.value = '';
   };
 
-  const isValidInput = () => {
+  const isValidInput = (username, age) => {
     if (username.trim().length === 0 || age.trim().length === 0) {
       setError({
         title: 'Invalid input',
@@ -63,11 +61,6 @@ const UserForm = (props) => {
     setError();
   };
 
-  const resetFields = () => {
-    setUsername('');
-    setAge('');
-  };
-
   return (
     <Fragment>
       {error && (
@@ -78,16 +71,8 @@ const UserForm = (props) => {
         />
       )}
       <form className={styles.container} onSubmit={handleSubmit}>
-        <UserInput
-          label="Username"
-          value={username}
-          onUpdateValue={handleChangeUsername}
-        />
-        <UserInput
-          label="Age (Years)"
-          value={age}
-          onUpdateValue={handleChangeAge}
-        />
+        <UserInput label="Username" innerRef={nameInputRef} />
+        <UserInput label="Age (Years)" innerRef={ageInputRef} />
         <Button type="submit">Add User</Button>
       </form>
     </Fragment>
